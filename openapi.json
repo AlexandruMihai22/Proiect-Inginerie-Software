@@ -1,5 +1,6 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
+
   "info": {
     "version": "1.0.0",
     "title": "SmartPlantSystem",
@@ -14,16 +15,19 @@
       "email": "alexandrumihai2357@gmail.com"
     }
   },
+
   "servers": [
     {
       "url": "http://127.0.0.1:5000/"
     }
   ],
+
   "tags": [
     {
       "name": "auth"
     }
   ],
+
   "paths": {
     "/auth/register": {
       "post": {
@@ -33,19 +37,21 @@
         "tags": [
             "auth"
         ],
-        "requestBody":{
+
+        "requestBody": {
           "description": "",
           "required": true,
           "content": {
-            "application/json":{
-              "schema":{
+            "application/json": {
+              "schema": {
                 "$ref": "#/components/schemas/RegistrationRequestData"
               }
             }
           }
         },
+
         "responses": {
-          "200":{
+          "200": {
             "$ref": "#/components/responses/SuccessfulRegister"
           },
           "403": {
@@ -54,6 +60,7 @@
         }
       }
     },
+
     "/auth/login": {
       "post": {
         "summary": "Endpoint for login existing user",
@@ -62,6 +69,7 @@
         "tags": [
           "auth"
         ],
+
         "responses": {
           "200": {
             "$ref": "#/components/responses/SuccessfulLogin"
@@ -73,15 +81,16 @@
       }
     },
 
-    "/headrest":{
-      "get":{
+    "/headrest": {
+      "get": {
         "summary": "Get the angle at which the headrest is set",
         "operationId": "set_headrest",
         "description": "Get the current angle at which the headrest is set",
-        "tags":[
+        "tags": [
           "functions"
         ],
-        "responses":{
+
+        "responses": {
           "200": {
             "description": "Successfully retrieved headrest angle",
             "content": {
@@ -96,53 +105,59 @@
       }
     }
   },
+
   "components": {
     "schemas": {
-      "StatusResponse":{
+      "StatusResponse": {
         "type": "object",
-        "properties":{
-          "status":{
+        "properties": {
+          "status": {
             "type": "string"
           }
         }
       },
-      "RegistrationRequestData":{
+
+      "RegistrationRequestData": {
         "type": "object",
-        "properties":{
+        "properties": {
           "username": {
             "type": "string"
           },
-          "password":{
-            "type":"string"
+
+          "password": {
+            "type": "string"
           }
         }
       },
-      "HeadrestResponse":{
+
+      "HeadrestResponse": {
         "type": "object",
-        "properties":{
+        "properties": {
           "status": {
             "type": "string"
           },
-          "data":{
-            "type":"object",
-            "properties":{
-              "id":{
-                "type":"integer"
+
+          "data": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
               },
-              "timestamp":{
-                "type":"string"
+              "timestamp": {
+                "type": "string"
               },
-              "value":{
-                "type":"string"
+              "value": {
+                "type": "string"
               }
             }
           }
         }
       }
     },
+
     "responses": {
       "SuccessfulRegister": {
-        "description":"New user has successfully registered",
+        "description": "New user has successfully registered",
         "content": {
           "application/json": {
             "schema": {
@@ -151,8 +166,9 @@
           }
         }
       },
+
       "FailedRegistration": {
-        "description":"Authentication failed",
+        "description": "Authentication failed",
         "content": {
           "application/json": {
             "schema": {
@@ -161,8 +177,9 @@
           }
         }
       },
+
       "SuccessfulLogin": {
-        "description":"New user has successfully logged in",
+        "description": "New user has successfully logged in",
         "content": {
           "application/json": {
             "schema": {
@@ -171,8 +188,9 @@
           }
         }
       },
+
       "FailedLogin": {
-        "description":"Login failed",
+        "description": "Login failed",
         "content": {
           "application/json": {
             "schema": {
@@ -181,9 +199,10 @@
           }
         }
       },
-      "SuccessfullyHeadrestRetrieval":{
-        "description":"Successfully retrieved the angle of the headrest",
-        "content":{
+
+      "SuccessfullyHeadrestRetrieval": {
+        "description": "Successfully retrieved the angle of the headrest",
+        "content": {
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/HeadrestResponse"

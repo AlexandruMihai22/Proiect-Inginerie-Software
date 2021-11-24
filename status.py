@@ -1,16 +1,13 @@
 from db import get_db
 
+
 def get_status():
     headrest = get_db().execute(
-        'SELECT id, timestamp, value'
-        ' FROM headrest'
-        ' ORDER BY timestamp DESC'
+        'SELECT id, timestamp, value FROM headrest ORDER BY timestamp DESC'
     ).fetchone()
 
     sheet = get_db().execute(
-        'SELECT id, changed_date, color'
-        ' FROM sheet'
-        ' ORDER BY changed_date DESC'
+        'SELECT id, changed_date, color FROM sheet ORDER BY changed_date DESC'
     ).fetchone()
 
     if headrest is None:

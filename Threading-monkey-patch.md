@@ -1,10 +1,10 @@
-## Monnkey-patch
+## Monkey-patch
 
 The async protocol on socketsIO is problematic. 
 
 Here is the code that tries multiple types of async protocols, and choses whichever works.
 
-```
+```python
 async_mode = None
 
 if async_mode is None:
