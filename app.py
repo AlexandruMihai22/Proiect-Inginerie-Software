@@ -11,11 +11,15 @@ import db
 import auth
 import temperature
 import temperature_api
+import watering
+import wateringIntervals
 # import status
 # import status_api
 
 
 # Necessary monkey-patch
+
+
 eventlet.monkey_patch()
 
 app: Flask
@@ -48,6 +52,8 @@ def create_app() -> Flask:
     db.init_app(app)
     app.register_blueprint(auth.bp)
     app.register_blueprint(temperature.bp)
+    app.register_blueprint(watering.bp)
+    app.register_blueprint(wateringIntervals.bp)
 
     return app
 
