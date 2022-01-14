@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, redirect, url_for, render_template
 from threading import Thread
 from flask_mqtt import Mqtt
 from flask_socketio import SocketIO
@@ -9,10 +9,10 @@ import json
 import time
 import db
 import auth
-import status
-import temperature
-
-
+import watering
+import wateringIntervals
+import weather_bp
+import system_temperature_bp
 
 
 app = None
@@ -28,23 +28,20 @@ def create_app():
     )
 
     @app.route('/')
-    def hello_world():
-        # Here I chose to start the periodic publishing after the root endpoint is called.
-        # It's not the best nor cleaneste approach, but will have to refactor it.
-        # What is important is that the background_thread function is called on
-        # a separate thread, so that publishing can happen while simultaneously
-        # HTTP endpoints are also functional.
-
+    def home():
         global thread
         if thread is None:
             thread = Thread(target=background_thread)
             thread.daemon = True
             thread.start()
-        return 'Hello World!'
+        return 'Hello World'
 
     db.init_app(app)
     app.register_blueprint(auth.bp)
-    app.register_blueprint(temperature.bp)
+    app.register_blueprint(watering.bp)
+    app.register_blueprint(wateringIntervals.bp)
+    app.register_blueprint(weather_bp.bp)
+    app.register_blueprint(system_temperature_bp.bp)
 
     return app
 
@@ -75,7 +72,7 @@ def background_thread():
         # Using app context is required because the get_status() functions
         # requires access to the db.
         with app.app_context():
-            message = json.dumps({'status': 'Please set a value '}, default=str)
+            message = json.dumps({"status"}, default=str)
             # Publish
             mqtt.publish('python/mqtt', message)
 

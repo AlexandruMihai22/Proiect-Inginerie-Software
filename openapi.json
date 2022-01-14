@@ -73,21 +73,21 @@
       }
     },
 
-    "/headrest":{
+    "/system_temperature":{
       "get":{
-        "summary": "Get the angle at which the headrest is set",
-        "operationId": "set_headrest",
-        "description": "Get the current angle at which the headrest is set",
+        "summary": "Get the temperature at which the headrest is set",
+        "operationId": "get_temperature",
+        "description": "Get the current temperature at which the system is set",
         "tags":[
           "functions"
         ],
         "responses":{
           "200": {
-            "description": "Successfully retrieved headrest angle",
+            "description": "Temperature successfully retrieved",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HeadrestResponse"
+                  "$ref": "#/components/schemas/SystemTemperatureResponse"
                 }
               }
             }
@@ -182,11 +182,11 @@
         }
       },
       "SuccessfullyHeadrestRetrieval":{
-        "description":"Successfully retrieved the angle of the headrest",
+        "description":"Temperature successfully retrieved",
         "content":{
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/HeadrestResponse"
+              "$ref": "#/components/schemas/SystemTemperatureResponse"
             }
           }
         }
