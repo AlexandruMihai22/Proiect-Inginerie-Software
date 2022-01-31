@@ -40,7 +40,7 @@ def test_db_connection(app):
         except sqlite3.Error:
             err = True
 
-        assert err == False
+        assert not err
 
 
 # -------- END DATABASE --------
@@ -58,7 +58,7 @@ def client(app):
 
 
 def test_root_endpoint(client):
-    landing = client.get("/")
+    landing = client.get('/')
     html = landing.data.decode()
 
     assert 'Hello World' in html
@@ -87,8 +87,8 @@ def login(client, username, password):
 def test_register_login_logout(client):
     """Make sure register, login and logout works."""
 
-    username = "test"
-    password = "test"
+    username = 'test'
+    password = 'test'
 
     rv = register(client, username, password)
     assert b'user registered succesfully' in rv.data
@@ -99,7 +99,7 @@ def test_register_login_logout(client):
     # rv = logout(client)
     # assert b'You were logged out' in rv.data
 
-    rv = login(client, f"{username}x", password)
+    rv = login(client, f'{username}x', password)
     assert b'username not found' in rv.data
 
     rv = login(client, username, f'{password}x')
@@ -107,29 +107,29 @@ def test_register_login_logout(client):
 
 
 def test_get_temperature(client):
-    register(client, "test", "test")
+    register(client, 'test', 'test')
     login(client, "test", "test")
     payload = {'temp': 100}
     client.post('/system_temperature/set', data=payload, follow_redirects=True)
-    request = client.get("/system_temperature/")
+    request = client.get('/system_temperature/')
     assert request.status_code == 200
 
 
 def test_set_temperature(client):
-    register(client, "test", "test")
-    login(client, "test", "test")
+    register(client, 'test', 'test')
+    login(client, 'test', 'test')
     payload = {'temp': 100}
     rv = client.post('/system_temperature/set', data=payload, follow_redirects=True)
     res = json.loads(rv.data.decode())
     assert rv.status_code == 200
-    assert res["status"] == "Temperature successfully retrieved"
+    assert res['status'] == "Temperature successfully retrieved."
 
 
 def test_watering_intervals(client):
-    register(client, "test", "test")
-    login(client, "test", "test")
+    register(client, 'test', 'test')
+    login(client, 'test', 'test')
     payload = {'water_quantity': 40, 'total_water_quantity': 120, 'interval': 2}
     rv = client.post('/watering/intervals', data=payload, follow_redirects=True)
     res = json.loads(rv.data.decode())
     assert res.status_code == 200
-    assert res["status"] == "The plant was successfully watered"
+    assert res['status'] == "The plant was successfully watered."

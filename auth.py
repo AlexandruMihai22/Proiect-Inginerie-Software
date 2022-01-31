@@ -1,8 +1,6 @@
 import functools
 
-from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for, jsonify
-)
+from flask import Blueprint, g, request, session, jsonify
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from db import get_db
@@ -10,27 +8,27 @@ from db import get_db
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 
-@bp.route('/register', methods=["POST"])
+@bp.route('/register', methods=['POST'])
 def register():
     username = request.form.get('username')
     password = request.form.get('password')
     db = get_db()
 
     if not username:
-        return jsonify({'status': 'Username is required.'}), 403
+        return jsonify({'status': "Username is required."}), 403
     elif not password:
-        return jsonify({'status': 'Password is required.'}), 403
+        return jsonify({'status': "Password is required."}), 403
 
     try:
         db.execute(
-            "INSERT INTO user (username, password) VALUES (?, ?)",
-            (username, generate_password_hash(password)),
+            'INSERT INTO user (username, password) VALUES (?, ?)',
+            username, generate_password_hash(password),
         )
         db.commit()
     except db.IntegrityError:
-        return jsonify({'status': f'User {username} is already registered.'}), 403
+        return jsonify({'status': f"User {username} is already registered."}), 403
 
-    return jsonify({'status': 'user registered succesfully'}), 200
+    return jsonify({'status': "User registered succesfully."}), 200
 
 
 @bp.route('/login', methods=["POST"])
@@ -38,9 +36,8 @@ def login():
     username = request.form['username']
     password = request.form['password']
     db = get_db()
-    error = None
     user = db.execute(
-        'SELECT * FROM user WHERE username = ?', (username,)
+        'SELECT * FROM user WHERE username = ?', username
     ).fetchone()
 
     if user is None:
@@ -78,5 +75,5 @@ def load_logged_in_user():
         g.user = None
     else:
         g.user = get_db().execute(
-            'SELECT * FROM user WHERE id = ?', (user_id,)
+            'SELECT * FROM user WHERE id = ?', user_id
         ).fetchone()
