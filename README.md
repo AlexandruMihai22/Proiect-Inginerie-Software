@@ -123,7 +123,7 @@ set FLASK_ENV=development
 
 PowerShell:
 ```sh
-$env:FLASK_ENV = "development
+$env:FLASK_ENV = "development"
 ```
 
 
