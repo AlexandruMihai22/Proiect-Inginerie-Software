@@ -116,5 +116,16 @@ brew install mosquitto
 brew services restart mosquitto
 ```
 
+### Storm Glass API 
+
+In order to collect data about weather, we used The Storm Glass API, which allows you to fetch weather data for any coordinate on the globe in a simple, programmatic way using conventional HTTP requests. When a request is successful, a response will be sent back in the form of a JSON object.
+The weather request is used to fetch weather data for a point. The Storm Glass API provides marine weather as well as global weather for land and lakes.
+
+Point Requests are used to retrieve data for a single coordinate.
+
+```sh
+https://api.stormglass.io/v2/weather/point
+```
+You can read more about the required parameters and the response format [here](https://docs.stormglass.io/?_gl=1*1hkz7yn*_ga*MTcyNzk0ODA3OS4xNjM2OTE4ODk2*_ga_79XDW52F27*MTYzNjkxODg5Ni4xLjAuMTYzNjkxODkwOC4w&_ga=2.44520877.823273569.1636918896-1727948079.1636918896#/weather)
 
 
