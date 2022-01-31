@@ -6,6 +6,7 @@ import os
 # env variables
 load_dotenv()
 
+
 def call_weather_api(params):
     # Get first hour of today
     start = arrow.utcnow()
@@ -46,14 +47,25 @@ def get_temperature_from_weather_api():
 
 def get_humidity_from_weather_api():
     json_data = call_weather_api(['humidity'])
-    temperature = json_data['hours'][0]['humidity']['noaa']
+    humidity = json_data['hours'][0]['humidity']['noaa']
     time = json_data['hours'][0]['time']
     return {
         'data': {
-            'humidity': temperature,
+            'humidity': humidity,
             'time': time
         }
     }
 
 
-print(get_humidity_from_weather_api())
+def get_precipitation_from_weather_api():
+    json_data = call_weather_api(['precipitation'])
+    precipitation = json_data['hours'][0]['precipitation']['noaa']
+    time = json_data['hours'][0]['time']
+    return {
+        'data': {
+            'precipitation': precipitation,
+            'time': time
+        }
+    }
+
+#print(get_humidity_from_weather_api())
