@@ -6,7 +6,7 @@ Our application is a prototype for an IoT device, which implements a smart plant
 parameters that are updated based on weather-related information.
 
 
-![alt text](https://github.com/FlorescuMiruna/LFA/blob/main/plant.jpg)
+![Plant logo](https://github.com/AlexandruMihai22/Proiect-Inginerie-Software/blob/master/plant.jpg)
 
 ### Implemented endpoints:
 
