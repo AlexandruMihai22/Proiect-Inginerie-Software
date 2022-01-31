@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS temperature;
 DROP TABLE IF EXISTS water;
 DROP TABLE IF EXISTS weather;
 DROP TABLE IF EXISTS watering;
+DROP TABLE IF EXISTS soil_moisture;
 
 CREATE TABLE user (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -38,10 +39,8 @@ CREATE TABLE temperature (
     value REAL NOT NULL
 );
 
-CREATE TABLE weather (
+CREATE TABLE soil_moisture (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    temperature REAL NOT NULL,
-    humidity REAL NOT NULL,
-    wind_speeed REAL NOT NULL
+    value REAL NOT NULL
 );

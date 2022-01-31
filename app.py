@@ -13,19 +13,26 @@ import watering
 import wateringIntervals
 import weather_bp
 import system_temperature_bp
-
+import soil_moisture_bp
+import status_bp
+import status
 
 app = None
 mqtt = None
 socketio = None
 thread = None
 
-def create_app():
+
+def create_app(testing=False, db_path='flaskr.sqlite'):
     global app
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
         SECRET_KEY='dev',
+        DB_PATH=db_path
     )
+    if testing:
+        app.config['TESTING'] = True
+        app.config['LOGIN_DISABLED'] = True
 
     @app.route('/')
     def home():
@@ -36,17 +43,20 @@ def create_app():
             thread.start()
         return 'Hello World'
 
-    db.init_app(app)
+    if not testing:
+        db.init_app(app)
     app.register_blueprint(auth.bp)
     app.register_blueprint(watering.bp)
     app.register_blueprint(wateringIntervals.bp)
     app.register_blueprint(weather_bp.bp)
     app.register_blueprint(system_temperature_bp.bp)
+    app.register_blueprint(soil_moisture_bp.bp)
+    app.register_blueprint(status_bp.bp)
 
     return app
 
-def create_mqtt_app():
 
+def create_mqtt_app():
     # Setup connection to mqtt broker
     app.config['MQTT_BROKER_URL'] = 'localhost'  # use the free broker from HIVEMQ
     app.config['MQTT_BROKER_PORT'] = 1883  # default port for non-tls connection
@@ -62,6 +72,7 @@ def create_mqtt_app():
 
     return mqtt
 
+
 # Start MQTT publishing
 
 # Function that every second publishes a message
@@ -72,9 +83,10 @@ def background_thread():
         # Using app context is required because the get_status() functions
         # requires access to the db.
         with app.app_context():
-            message = json.dumps({"status"}, default=str)
+            message = json.dumps(status.get_status(), default=str)
             # Publish
             mqtt.publish('python/mqtt', message)
+
 
 # App will now have to be run with `python app.py` as flask is now wrapped in socketio.
 # The following makes sure that socketio is also used
@@ -83,6 +95,7 @@ def run_socketio_app():
     create_app()
     create_mqtt_app()
     socketio.run(app, host='localhost', port=5000, use_reloader=False, debug=True)
+
 
 if __name__ == '__main__':
     run_socketio_app()

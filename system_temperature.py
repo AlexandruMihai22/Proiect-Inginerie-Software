@@ -11,6 +11,10 @@ def get_system_temperature():
         ' FROM temperature'
         ' ORDER BY timestamp DESC'
     ).fetchone()
+
+    if check is None:
+        return {'status': 'Please set temperature'}
+
     return jsonify({
         'status': 'Temperature successfully retrieved',
         'data': {
