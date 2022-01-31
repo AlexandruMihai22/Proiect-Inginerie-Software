@@ -1,5 +1,5 @@
 from db import get_db
-from weather import (get_humidity_from_weather_api, get_temperature_from_weather_api, get_precipitation_from_weather_api)
+from weather import get_humidity_from_weather_api, get_precipitation_from_weather_api
 
 
 def get_ideal_parameters(humidity, precipitation, soil_moisture, system_temperature):
@@ -18,9 +18,7 @@ def get_ideal_parameters(humidity, precipitation, soil_moisture, system_temperat
 
 def get_status():
     soil_moisture = get_db().execute(
-        'SELECT id, timestamp, value'
-        ' FROM soil_moisture'
-        ' ORDER BY timestamp DESC'
+        'SELECT id, timestamp, value FROM soil_moisture ORDER BY timestamp DESC'
     ).fetchone()
 
     if soil_moisture:
@@ -43,9 +41,8 @@ def get_status():
     if water_quantity:
         db = get_db()
         db.execute(
-            'INSERT INTO watering (water_quantity)'
-            ' VALUES (?)',
-            (water_quantity,)
+            'INSERT INTO watering (water_quantity) VALUES (?)',
+            water_quantity
         )
         db.commit()
 
@@ -54,6 +51,3 @@ def get_status():
             'water_quantity': water_quantity
             }
         }
-
-
-

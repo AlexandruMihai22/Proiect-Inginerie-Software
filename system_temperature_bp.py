@@ -1,8 +1,5 @@
-from flask import (
-    Blueprint, request, jsonify
-)
+from flask import Blueprint
 from auth import login_required
-from db import get_db
 import system_temperature
 
 bp = Blueprint('system_temperature_bp', __name__, url_prefix='/system_temperature')
@@ -18,4 +15,3 @@ def get_temperature():
 @login_required
 def set_temperature():
     return system_temperature.set_system_temperature()
-

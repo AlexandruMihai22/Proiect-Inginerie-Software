@@ -1,8 +1,5 @@
-from flask import (
-    Blueprint, request, jsonify
-)
+from flask import Blueprint
 from auth import login_required
-from db import get_db
 import soil_moisture
 
 bp = Blueprint('soil_moisture_bp', __name__, url_prefix='/soil_moisture')
