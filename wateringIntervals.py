@@ -1,4 +1,4 @@
-#import sched, time
+# import sched, time
 from time import time, sleep
 
 from flask import (
@@ -10,6 +10,7 @@ from db import get_db
 
 bp = Blueprint('watering/intervals', __name__, url_prefix='/watering/intervals')
 
+
 @bp.route('/', methods=('GET', 'POST'))
 @login_required
 def set_watering():
@@ -17,7 +18,6 @@ def set_watering():
         water_quantity = request.form['water_quantity']
         total_water_quantity = request.form['total_water_quantity']
         interval = request.form['interval']
-
 
         if not water_quantity:
             return jsonify({'status': 'Water quantity is required.'}), 403
@@ -36,11 +36,9 @@ def set_watering():
         water_quantity = int(water_quantity)
         interval = int(interval)
 
-
         while total_water_quantity - water_quantity >= 0:
             total_water_quantity -= water_quantity
             sleep(interval - time() % interval)
-            print("hmm")
             db.execute(
                 'INSERT INTO watering (water_quantity)'
                 ' VALUES (?)',
@@ -65,7 +63,6 @@ def set_watering():
             }
         }), 200
 
-
     if request.method == 'GET':
         # db = get_db()
         water_info = get_db().execute(
@@ -73,10 +70,9 @@ def set_watering():
             ' FROM watering'
         ).fetchall()
 
-
         waterJsonList = []
         for i in range(len(water_info)):
-            water_json  ={
+            water_json = {
                 'status': 'The plant was successfully watered',
                 'data': {
                     'id': water_info[i]['id'],
@@ -88,6 +84,4 @@ def set_watering():
 
         response = jsonify(waterJsonList)
 
-
-        return jsonify(waterJsonList),200
-
+        return jsonify(waterJsonList), 200
