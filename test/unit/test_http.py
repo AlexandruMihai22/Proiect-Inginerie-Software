@@ -108,7 +108,7 @@ def test_register_login_logout(client):
 
 def test_get_temperature(client):
     register(client, 'test', 'test')
-    login(client, "test", "test")
+    login(client, 'test', 'test')
     payload = {'temp': 100}
     client.post('/system_temperature/set', data=payload, follow_redirects=True)
     request = client.get('/system_temperature/')

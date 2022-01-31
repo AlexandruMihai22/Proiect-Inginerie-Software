@@ -31,7 +31,7 @@ def register():
     return jsonify({'status': "User registered succesfully."}), 200
 
 
-@bp.route('/login', methods=["POST"])
+@bp.route('/login', methods=['POST'])
 def login():
     username = request.form['username']
     password = request.form['password']
