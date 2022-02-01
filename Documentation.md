@@ -1,9 +1,11 @@
 
 ## Features
 
-``` sh ```
+``` sh 
+Logs in a user. — parameters:
+```
 
-        Logs in a user. — parameters:
+        
 required:
 
 username
