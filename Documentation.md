@@ -2,25 +2,65 @@
 ## Features
 
 
-******
-Authentication
-******
 
-``` sh 
-Logs in a user. — parameters:
+### Authentication
+
+```sh
+auth.login()
 ```
 
-        
-required:
 
-username
-password
+``      
+      required:
+``
 
+* username
+* password
 
+``
 responses:
+``
 
+``
 200:
-description: user logged in succesfully.
+``
 
+        description: user logged in succesfully.
+``
 403:
-description: there is no user with that username and password.
+``
+
+        description: there is no user with that username and password.
+        
+
+```sh
+auth.register()
+```
+
+
+``      
+      required:
+``
+
+* username
+* password
+
+``
+responses:
+``
+
+``
+200:
+``
+
+       user registered succesfully
+``
+403:
+``
+        Username is required.
+        Password is required.
+        User is already registered.
+        
+
+
+ 
