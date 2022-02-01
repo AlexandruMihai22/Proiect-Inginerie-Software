@@ -241,9 +241,20 @@ responses:
 ```
       The plant was successfully watered
 ```
-       
+    
+### Weather API
 
+```sh
+weather/temperature
+```
 
+```sh
+weather/humidity
+```
+
+```sh
+weather/precipitation
+```
 
 
 
