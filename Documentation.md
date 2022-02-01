@@ -187,6 +187,61 @@ responses:
 ``
 
         Please set temperature
+        
+### Water
+
+```sh
+      /watering/
+```
+
+
+``      
+      required:
+``
+
+* water_quantity
+
+
+``
+responses:
+``
+
+``
+200:
+``
+
+      The plant was successfully watered
+
+
+``
+422:
+``
+      water quantity must be numeric.
+
+
+``
+403:
+``
+ 
+      Water quantity is required.
+
+
+```sh
+      /watering/
+```
+
+
+``
+responses:
+``
+
+``
+      200:
+``
+```
+      The plant was successfully watered
+```
+       
 
 
 
