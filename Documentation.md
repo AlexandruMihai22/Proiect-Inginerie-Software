@@ -64,7 +64,133 @@ responses:
 
         User is already registered.
 
-        
+### System temperature
+
+
+```sh
+/system_temperature/set
+```
+
+
+``      
+      required:
+``
+
+* temp
+
+
+``
+responses:
+``
+
+``
+200:
+``
+
+      Temperature successfully retrieved
+``
+422:
+``
+
+        temperature must be numeric.
+
+``
+403:
+``
+
+       Temp is required.
+
+```sh
+/system_temperature
+```
+
+
+``       required:
+``
+
+* temp
+
+
+``
+responses:
+``
+
+``
+200:
+``
+
+       Temperature successfully retrieved
+       
+``
+403:
+``
+
+        Please set temperature
+
+### Soil Moisture
+
+```sh
+      soil_moisture/set
+```
+
+
+``      
+      required:
+``
+
+* soil_moisture
+
+
+``
+responses:
+``
+
+``
+200:
+``
+
+      soil moisture successfully retrieved
+``
+422:
+``
+      soil moisture must be numeric.
+
+
+``
+403:
+``
+      Please set soil moisture
+      soil_moisture is required.
+```sh
+/system_temperature
+```
+
+
+``       required:
+``
+
+* temp
+
+
+``
+responses:
+``
+
+``
+200:
+``
+
+       Temperature successfully retrieved
+       
+``
+403:
+``
+
+        Please set temperature
+
+
+
+
 
 
  
