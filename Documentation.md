@@ -1,6 +1,11 @@
 
 ## Features
 
+
+******
+Authentication
+******
+
 ``` sh 
 Logs in a user. — parameters:
 ```
