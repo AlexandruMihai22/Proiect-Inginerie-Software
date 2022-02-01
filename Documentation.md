@@ -57,18 +57,13 @@ responses:
 ``
 403:
 ``
-      
-``
+
         Username is required.
-``
-        
-``
+
         Password is required.
-``
-        
-``
+
         User is already registered.
-``
+
         
 
 
