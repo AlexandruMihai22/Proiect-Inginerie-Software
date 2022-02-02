@@ -14,43 +14,38 @@
       "email": "alexandrumihai2357@gmail.com"
     }
   },
-
   "servers": [
     {
       "url": "http://127.0.0.1:5000/"
     }
   ],
-
   "tags": [
     {
       "name": "auth"
     }
   ],
-
   "paths": {
     "/auth/register": {
       "post": {
-        "summary": "Endpoint for registering new user.",
+        "summary": "Endpoint for registering new user",
         "operationId": "register",
-        "description": "Register new users.",
+        "description": "Register new users",
         "tags": [
             "auth"
         ],
-
-        "requestBody": {
+        "requestBody":{
           "description": "",
           "required": true,
           "content": {
-            "application/json": {
-              "schema": {
+            "application/json":{
+              "schema":{
                 "$ref": "#/components/schemas/RegistrationRequestData"
               }
             }
           }
         },
-
         "responses": {
-          "200": {
+          "200":{
             "$ref": "#/components/responses/SuccessfulRegister"
           },
           "403": {
@@ -59,16 +54,14 @@
         }
       }
     },
-
     "/auth/login": {
       "post": {
-        "summary": "Endpoint for login existing user.",
+        "summary": "Endpoint for login existing user",
         "operationId": "login",
-        "description": "Login existing users.",
+        "description": "Login existing users",
         "tags": [
           "auth"
         ],
-
         "responses": {
           "200": {
             "$ref": "#/components/responses/SuccessfulLogin"
@@ -80,17 +73,17 @@
       }
     },
 
-    "/system_temperature": {
-      "get": {
-        "summary": "Get the temperature at which the headrest is set.",
+    "/system_temperature":{
+      "get":{
+        "summary": "Get the temperature at which the headrest is set",
         "operationId": "get_temperature",
-        "description": "Get the current temperature at which the system is set.",
-        "tags": [
+        "description": "Get the current temperature at which the system is set",
+        "tags":[
           "functions"
         ],
-        "responses": {
+        "responses":{
           "200": {
-            "description": "Temperature successfully retrieved.",
+            "description": "Temperature successfully retrieved",
             "content": {
               "application/json": {
                 "schema": {
@@ -103,66 +96,31 @@
       }
     }
   },
-
   "components": {
     "schemas": {
-      "StatusResponse": {
+      "StatusResponse":{
         "type": "object",
-        "properties": {
-          "status": {
+        "properties":{
+          "status":{
             "type": "string"
           }
         }
       },
-
-      "SystemTemperatureResponse": {
+      "RegistrationRequestData":{
         "type": "object",
-        "properties": {
-          "status": {
-            "type": "string"
-          }
-        }
-      },
-
-      "RegistrationRequestData": {
-        "type": "object",
-        "properties": {
+        "properties":{
           "username": {
             "type": "string"
           },
-          "password": {
-            "type": "string"
-          }
-        }
-      },
-
-      "HeadrestResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string"
-          },
-          "data": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "integer"
-              },
-              "timestamp": {
-                "type": "string"
-              },
-              "value": {
-                "type": "string"
-              }
-            }
+          "password":{
+            "type":"string"
           }
         }
       }
     },
-
     "responses": {
       "SuccessfulRegister": {
-        "description": "New user has successfully registered.",
+        "description":"New user has successfully registered",
         "content": {
           "application/json": {
             "schema": {
@@ -171,9 +129,8 @@
           }
         }
       },
-
       "FailedRegistration": {
-        "description": "Authentication failed.",
+        "description":"Authentication failed",
         "content": {
           "application/json": {
             "schema": {
@@ -182,9 +139,8 @@
           }
         }
       },
-
       "SuccessfulLogin": {
-        "description": "New user has successfully logged in.",
+        "description":"New user has successfully logged in",
         "content": {
           "application/json": {
             "schema": {
@@ -193,24 +149,12 @@
           }
         }
       },
-
       "FailedLogin": {
-        "description": "Login failed.",
+        "description":"Login failed",
         "content": {
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/StatusResponse"
-            }
-          }
-        }
-      },
-
-      "SuccessfullyHeadrestRetrieval": {
-        "description": "Temperature successfully retrieved.",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/SystemTemperatureResponse"
             }
           }
         }
