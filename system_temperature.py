@@ -1,22 +1,18 @@
 from db import get_db
 
-from flask import (
-    Blueprint, request, jsonify
-)
+from flask import request, jsonify
 
 
 def get_system_temperature():
     check = get_db().execute(
-        'SELECT id, timestamp, value'
-        ' FROM temperature'
-        ' ORDER BY timestamp DESC'
+        'SELECT id, timestamp, value FROM temperature ORDER BY timestamp DESC'
     ).fetchone()
 
     if check is None:
-        return {'status': 'Please set temperature'}
+        return {'status': "Please set temperature."}
 
     return jsonify({
-        'status': 'Temperature successfully retrieved',
+        'status': "Temperature successfully retrieved.",
         'data': {
             'id': check['id'],
             'timestamp': check['timestamp'],
@@ -37,9 +33,8 @@ def set_system_temperature():
 
     db = get_db()
     db.execute(
-        'INSERT INTO temperature (value)'
-        'VALUES (?)',
-        (temp,)
+        'INSERT INTO temperature (value) VALUES (?)',
+        temp
     )
     db.commit()
 

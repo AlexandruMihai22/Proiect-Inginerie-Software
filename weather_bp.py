@@ -1,8 +1,5 @@
-from flask import (
-    Blueprint, request, jsonify
-)
+from flask import Blueprint
 from auth import login_required
-from db import get_db
 import weather
 
 bp = Blueprint('weather', __name__, url_prefix='/weather')
