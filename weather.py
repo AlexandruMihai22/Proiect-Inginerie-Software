@@ -1,4 +1,3 @@
-import json
 import arrow
 import requests
 from dotenv import load_dotenv
@@ -25,7 +24,7 @@ def call_weather_api(params):
             'source': "noaa"
         },
         headers={
-            'Authorization': os.getenv("API_KEY")
+            'Authorization': os.getenv('API_KEY')
         }
     )
 
@@ -68,4 +67,5 @@ def get_precipitation_from_weather_api():
         }
     }
 
-#print(get_humidity_from_weather_api())
+
+# print(get_humidity_from_weather_api())

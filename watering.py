@@ -1,6 +1,4 @@
-from flask import (
-    Blueprint, request, jsonify
-)
+from flask import Blueprint, request, jsonify
 
 from auth import login_required
 from db import get_db
@@ -19,29 +17,24 @@ def set_watering():
             return jsonify({'status': 'water quantity must be numeric.'}), 422
 
         if not water_quantity:
-            return jsonify({'status': 'Water quantity is required.'}), 403
+            return jsonify({'status': "Water quantity is required."}), 403
 
         db = get_db()
         db.execute(
-            'INSERT INTO watering (water_quantity)'
-            ' VALUES (?)',
-            (water_quantity,)
+            'INSERT INTO watering (water_quantity) VALUES (?)',
+            water_quantity
         )
         db.commit()
 
     check = get_db().execute(
-        'SELECT id, timestamp, water_quantity'
-        ' FROM watering'
-        ' ORDER BY timestamp DESC'
+        'SELECT id, timestamp, water_quantity FROM watering ORDER BY timestamp DESC'
     ).fetchone()
-
+    
     return jsonify({
-        'status': 'The plant was successfully watered',
+        'status': "The plant was successfully watered.",
         'data': {
             'id': check['id'],
             'timestamp': check['timestamp'],
             'water_quantity': check['water_quantity']
         }
     }), 200
-
-
