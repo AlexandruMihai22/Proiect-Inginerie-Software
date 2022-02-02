@@ -27,6 +27,10 @@ def get_system_temperature():
 
 def set_system_temperature():
     temp = request.form['temp']
+    try:
+        float(temp)
+    except:
+        return jsonify({'status': 'temperature must be numeric.'}), 422
     error = None
     if not temp:
         return jsonify({'status': 'Temp is required.'}), 403

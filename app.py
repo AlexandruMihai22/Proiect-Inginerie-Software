@@ -10,12 +10,15 @@ import time
 import db
 import auth
 import watering
-import wateringIntervals
 import weather_bp
 import system_temperature_bp
 import soil_moisture_bp
 import status_bp
 import status
+import eventlet
+
+# # Necessary monkey-patch
+# eventlet.monkey_patch()
 
 app = None
 mqtt = None
@@ -47,7 +50,6 @@ def create_app(testing=False, db_path='flaskr.sqlite'):
         db.init_app(app)
     app.register_blueprint(auth.bp)
     app.register_blueprint(watering.bp)
-    app.register_blueprint(wateringIntervals.bp)
     app.register_blueprint(weather_bp.bp)
     app.register_blueprint(system_temperature_bp.bp)
     app.register_blueprint(soil_moisture_bp.bp)
@@ -79,7 +81,7 @@ def create_mqtt_app():
 def background_thread():
     count = 0
     while True:
-        time.sleep(1)
+        time.sleep(5)
         # Using app context is required because the get_status() functions
         # requires access to the db.
         with app.app_context():

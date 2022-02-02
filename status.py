@@ -5,12 +5,14 @@ from weather import (get_humidity_from_weather_api, get_temperature_from_weather
 def get_ideal_parameters(humidity, precipitation, soil_moisture, system_temperature):
     ideal_temperature = 20
     ideal_moisture = 50
-    if soil_moisture >= ideal_moisture or precipitation > 4:
+    if precipitation is None:
+        precipitation = 0
+    if soil_moisture is None or soil_moisture >= ideal_moisture or precipitation > 4:
         return 0.0
     water_quantity = (ideal_moisture - soil_moisture) * 100
-    if system_temperature - ideal_temperature > 5:
+    if system_temperature and (system_temperature - ideal_temperature > 5):
         water_quantity += 50
-    if humidity < 100:
+    if humidity and humidity < 100:
         water_quantity += 50
 
     return water_quantity
@@ -48,8 +50,10 @@ def get_status():
             (water_quantity,)
         )
         db.commit()
-
+    else:
+        water_quantity = 0.0
     return {
+        'status': 'The plant was successfully watered',
         'data': {
             'water_quantity': water_quantity
             }
