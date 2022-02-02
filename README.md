@@ -56,6 +56,7 @@ parameters that are updated based on weather-related information.
 ## Weather API
 * The user can receive detailed information about the weather
 
+Full API documentation can be found [here](Documentation.md)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
