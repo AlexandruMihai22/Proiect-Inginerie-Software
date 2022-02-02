@@ -22,6 +22,7 @@
                 <li><a href="#install">Installation</a></li>
                 <li><a href="#mosquitto">Mosquitto</a></li>
                 <li><a href="#storm-glass">Storm Glass API</a></li>
+                  <li><a href="#test">Testing</a></li>
             </ul>
         </li>
     </ol>
@@ -190,6 +191,17 @@ Point Requests are used to retrieve data for a single coordinate.
 https://api.stormglass.io/v2/weather/point
 ```
 You can read more about the required parameters and the response format [here](https://docs.stormglass.io/?_gl=1*1hkz7yn*_ga*MTcyNzk0ODA3OS4xNjM2OTE4ODk2*_ga_79XDW52F27*MTYzNjkxODg5Ni4xLjAuMTYzNjkxODkwOC4w&_ga=2.44520877.823273569.1636918896-1727948079.1636918896#/weather)
+
+<div id="test"></div>
+
+### Testing 
+
+To run the tests:
+```sh
+python -m pytest -v
+```
+
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
