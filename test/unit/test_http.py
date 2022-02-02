@@ -97,19 +97,19 @@ def test_register_login_logout(client):
     password = "test"
 
     rv = register(client, username, password)
-    assert b'user registered succesfully' in rv.data
+    assert b'User registered succesfully.' in rv.data
 
     rv = login(client, username, password)
-    assert b'user logged in succesfully' in rv.data
+    assert b'User logged in succesfully.' in rv.data
 
     rv = logout(client)
-    assert b'user logged out succesfully' in rv.data
+    assert b'User logged out succesfully.' in rv.data
 
     rv = login(client, f"{username}x", password)
-    assert b'username not found' in rv.data
+    assert b'Username not found.' in rv.data
 
     rv = login(client, username, f'{password}x')
-    assert b'password is incorrect' in rv.data
+    assert b'Password is incorrect.' in rv.data
 
 # -----------------END Register, Login and logout ----------------
 
@@ -130,7 +130,7 @@ def test_set_temperature_route(client):
     rv = client.post('/system_temperature/set', data=payload, follow_redirects=True)
     res = json.loads(rv.data.decode())
     assert rv.status_code == 200
-    assert res["status"] == "Temperature successfully retrieved"
+    assert res["status"] == "Temperature successfully retrieved."
 
 
 def test_set_temperature_route_2(client):
@@ -156,7 +156,7 @@ def test_set_soil_moisture_route(client):
     rv = client.post('/soil_moisture/set', data=payload, follow_redirects=True)
     res = json.loads(rv.data.decode())
     assert rv.status_code == 200
-    assert res["status"] == "soil moisture successfully retrieved"
+    assert res["status"] == "Soil moisture successfully retrieved."
 
 
 def test_set_soil_moisture_route_2(client):
@@ -165,7 +165,7 @@ def test_set_soil_moisture_route_2(client):
     rv = client.post('/soil_moisture/set', data=payload, follow_redirects=True)
     res = json.loads(rv.data.decode())
     assert rv.status_code == 422
-    assert res["status"] == "soil moisture must be numeric."
+    assert res["status"] == "Soil moisture must be numeric."
 
 
 def test_watering_route(client):
@@ -174,7 +174,7 @@ def test_watering_route(client):
     rv = client.post('/watering', data=payload, follow_redirects=True)
     res = json.loads(rv.data.decode())
     assert rv.status_code == 200
-    assert res["status"] == "The plant was successfully watered"
+    assert res["status"] == "The plant was successfully watered."
 
 
 def test_get_humidity(client):

@@ -22,7 +22,7 @@ def set_watering():
         db = get_db()
         db.execute(
             'INSERT INTO watering (water_quantity) VALUES (?)',
-            water_quantity
+            (water_quantity,)
         )
         db.commit()
 

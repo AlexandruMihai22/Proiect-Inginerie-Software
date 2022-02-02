@@ -33,7 +33,7 @@ def set_system_temperature():
     db = get_db()
     db.execute(
         'INSERT INTO temperature (value) VALUES (?)',
-        temp
+        (temp,)
     )
     db.commit()
 
