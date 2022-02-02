@@ -116,28 +116,6 @@
             "type":"string"
           }
         }
-      },
-      "HeadrestResponse":{
-        "type": "object",
-        "properties":{
-          "status": {
-            "type": "string"
-          },
-          "data":{
-            "type":"object",
-            "properties":{
-              "id":{
-                "type":"integer"
-              },
-              "timestamp":{
-                "type":"string"
-              },
-              "value":{
-                "type":"string"
-              }
-            }
-          }
-        }
       }
     },
     "responses": {
@@ -177,16 +155,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/StatusResponse"
-            }
-          }
-        }
-      },
-      "SuccessfullyHeadrestRetrieval":{
-        "description":"Temperature successfully retrieved",
-        "content":{
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/SystemTemperatureResponse"
             }
           }
         }
