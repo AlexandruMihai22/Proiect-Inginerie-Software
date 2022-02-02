@@ -8,12 +8,15 @@ import time
 import db
 import auth
 import watering
-import wateringIntervals
 import weather_bp
 import system_temperature_bp
 import soil_moisture_bp
 import status_bp
 import status
+import eventlet
+
+# # Necessary monkey-patch
+# eventlet.monkey_patch()
 
 from gevent import monkey
 monkey.patch_all(ssl=False)
@@ -48,7 +51,6 @@ def create_app(testing=False, db_path='flaskr.sqlite'):
 
     app.register_blueprint(auth.bp)
     app.register_blueprint(watering.bp)
-    app.register_blueprint(wateringIntervals.bp)
     app.register_blueprint(weather_bp.bp)
     app.register_blueprint(system_temperature_bp.bp)
     app.register_blueprint(soil_moisture_bp.bp)
@@ -78,7 +80,7 @@ def create_mqtt_app():
 # Function that every second publishes a message
 def background_thread():
     while True:
-        time.sleep(1)
+        time.sleep(5)
         # Using app context is required because the get_status() functions
         # requires access to the db.
         with app.app_context():

@@ -11,6 +11,10 @@ bp = Blueprint('watering', __name__, url_prefix='/watering')
 def set_watering():
     if request.method == 'POST':
         water_quantity = request.form['water_quantity']
+        try:
+            float(water_quantity)
+        except:
+            return jsonify({'status': 'water quantity must be numeric.'}), 422
 
         if not water_quantity:
             return jsonify({'status': "Water quantity is required."}), 403
@@ -25,7 +29,7 @@ def set_watering():
     check = get_db().execute(
         'SELECT id, timestamp, water_quantity FROM watering ORDER BY timestamp DESC'
     ).fetchone()
-    print('check', check)
+    
     return jsonify({
         'status': "The plant was successfully watered.",
         'data': {
