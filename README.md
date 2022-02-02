@@ -38,6 +38,24 @@ parameters that are updated based on weather-related information.
 <div id="endpoints"></div>
 
 ### Implemented Endpoints:
+## Login
+## Register
+
+## System temperature 
+* The user can set a temperature for the system
+* The user can receive information about the system temperature
+
+## Soil Moisture
+* The user can set the soil moisture
+* The user can receive information about the soil moisture
+
+## Water
+* The user can water a plant
+* The user can receive information about watering the plants
+
+## Weather API
+* The user can receive detailed information about the weather
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
