@@ -200,7 +200,7 @@ You can read more about the required parameters and the response format [here](h
 
 To run the tests:
 ```sh
-python -m pytest -v
+python -m pytest -v -W ignore::DeprecationWarning
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
