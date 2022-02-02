@@ -105,10 +105,7 @@ responses:
 ```
 
 
-``       required:
-``
 
-* temp
 
 
 ``
@@ -162,14 +159,10 @@ responses:
       Please set soil moisture
       soil_moisture is required.
 ```sh
-/system_temperature
+/soil_moisture
 ```
 
 
-``       required:
-``
-
-* temp
 
 
 ``
@@ -180,13 +173,13 @@ responses:
 200:
 ``
 
-       Temperature successfully retrieved
+      Soil moisture successfully retrieved
        
 ``
 403:
 ``
 
-        Please set temperature
+        Please set soil_moisture
         
 ### Water
 
