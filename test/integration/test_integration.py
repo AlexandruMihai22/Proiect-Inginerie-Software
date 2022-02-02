@@ -1,9 +1,7 @@
 import os
-import sqlite3
 import tempfile
 
 import pytest
-import json
 
 import db
 import status

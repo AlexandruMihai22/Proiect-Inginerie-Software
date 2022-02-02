@@ -13,7 +13,6 @@ import system_temperature_bp
 import soil_moisture_bp
 import status_bp
 import status
-import eventlet
 
 # # Necessary monkey-patch
 # eventlet.monkey_patch()

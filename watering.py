@@ -13,7 +13,7 @@ def set_watering():
         water_quantity = request.form['water_quantity']
         try:
             float(water_quantity)
-        except:
+        except ValueError:
             return jsonify({'status': 'water quantity must be numeric.'}), 422
 
         if not water_quantity:

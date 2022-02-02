@@ -7,7 +7,7 @@ import json
 
 import db
 from app import create_app
-import system_temperature
+
 
 @pytest.fixture
 def app():
@@ -40,7 +40,7 @@ def test_db_connection(app):
         except sqlite3.Error:
             err = True
 
-        assert err == False
+        assert not err
 
 
 # -------- END DATABASE --------
@@ -203,4 +203,3 @@ def test_get_status(client):
 
 
 # -------- END HTTP ROUTES --------
-

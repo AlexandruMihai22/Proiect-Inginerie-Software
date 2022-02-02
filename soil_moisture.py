@@ -27,9 +27,8 @@ def set_soil_moisture():
     soil_moisture = request.form['soil_moisture']
     try:
         float(soil_moisture)
-    except:
+    except ValueError:
         return jsonify({'status': 'soil moisture must be numeric.'}), 422
-    error = None
     if not soil_moisture:
         return jsonify({'status': 'soil_moisture is required.'}), 403
 
