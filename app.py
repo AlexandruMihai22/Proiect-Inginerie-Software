@@ -2,6 +2,7 @@ from flask import Flask
 from threading import Thread
 from flask_mqtt import Mqtt
 from flask_socketio import SocketIO
+from gevent import monkey
 
 import json
 import time
@@ -14,15 +15,10 @@ import soil_moisture_bp
 import status_bp
 import status
 
-# # Necessary monkey-patch
-# eventlet.monkey_patch()
 
-from gevent import monkey
-monkey.patch_all(ssl=False)
-
-app: Flask | None = None
-mqtt: Mqtt | None = None
-socketio: SocketIO | None = None
+app: Flask
+mqtt: Mqtt
+socketio: SocketIO
 thread: Thread | None = None
 
 
@@ -98,4 +94,5 @@ def run_socketio_app():
 
 
 if __name__ == '__main__':
+    monkey.patch_all(ssl=False)
     run_socketio_app()
