@@ -3,7 +3,7 @@ import random
 from paho.mqtt import client as mqtt_client
 
 
-broker = 'localhost'
+broker = '127.0.0.1'
 port = 1883
 topic = "python/mqtt"
 # generate client ID with pub prefix randomly
