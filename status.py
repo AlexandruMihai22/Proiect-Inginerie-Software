@@ -27,9 +27,7 @@ def get_status():
         soil_moisture = soil_moisture['value']
 
     system_temperature = get_db().execute(
-        'SELECT id, timestamp, value'
-        ' FROM temperature'
-        ' ORDER BY timestamp DESC'
+        'SELECT id, timestamp, value FROM temperature ORDER BY timestamp DESC'
     ).fetchone()
 
     if system_temperature:
@@ -44,14 +42,15 @@ def get_status():
         db = get_db()
         db.execute(
             'INSERT INTO watering (water_quantity) VALUES (?)',
-            water_quantity
+            (water_quantity,)
         )
         db.commit()
     else:
         water_quantity = 0.0
+
     return {
         'status': 'The plant was successfully watered',
         'data': {
             'water_quantity': water_quantity
-            }
         }
+    }
