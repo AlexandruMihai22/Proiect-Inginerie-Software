@@ -16,9 +16,9 @@ import status_bp
 import status
 
 
-app: Flask
-mqtt: Mqtt
-socketio: SocketIO
+app: Flask | None = None
+mqtt: Mqtt | None = None
+socketio: SocketIO | None = None
 thread: Thread | None = None
 
 
@@ -64,8 +64,11 @@ def create_mqtt_app():
     app.config['MQTT_TLS_ENABLED'] = False  # set TLS to disabled for testing purposes
 
     global mqtt, socketio
-    mqtt = Mqtt(app)
-    socketio = SocketIO(app, async_mode='eventlet')
+    if mqtt is None:
+        mqtt = Mqtt(app)
+
+    if socketio is None:
+        socketio = SocketIO(app, async_mode='eventlet')
 
     return mqtt
 
@@ -81,6 +84,9 @@ def background_thread():
         with app.app_context():
             message = json.dumps(status.get_status(), default=str)
             # Publish
+            global mqtt
+            if mqtt is None:
+                mqtt = create_mqtt_app()
             mqtt.publish('python/mqtt', message.encode('UTF-8'))
 
 
