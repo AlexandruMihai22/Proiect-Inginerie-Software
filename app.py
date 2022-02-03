@@ -3,6 +3,7 @@ from threading import Thread
 from flask_mqtt import Mqtt
 from flask_socketio import SocketIO
 from gevent import monkey
+from typing import Optional
 
 import json
 import time
@@ -16,10 +17,10 @@ import status_bp
 import status
 
 
-app: Flask | None = None
-mqtt: Mqtt | None = None
-socketio: SocketIO | None = None
-thread: Thread | None = None
+app: Optional[Flask] = None
+mqtt: Optional[Mqtt] = None
+socketio: Optional[SocketIO] = None
+thread: Optional[Thread] = None
 
 
 def create_app(testing=False, db_path='flaskr.sqlite'):
