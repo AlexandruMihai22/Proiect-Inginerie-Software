@@ -87,7 +87,7 @@ responses:
 200:
 ``
 
-      Temperature successfully retrieved
+      Temperature successfully retrieved.
 ``
 422:
 ``
